@@ -262,7 +262,7 @@
     function end(g) { if (!g.over) { g.over = true; g.running = false; stateEl.textContent = "Done"; saveBest(); } }
     function saveBest() { bests[active] = Math.max(bests[active] || 0, Math.floor(game.score)); localStorage.setItem("starfall-bests", JSON.stringify(bests)); bestEl.textContent = bests[active]; }
     function loop(t) { const dt = Math.min(.035, (t - last) / 1000 || 0); last = t; if (game.running && !game.over) games[active].update(game, dt); draw(); raf = requestAnimationFrame(loop); }
-    function draw() { games[active].draw(game); scoreEl.textContent = Math.floor(game.score); if (game.over) overlay("Try again"); else if (!game.running && (active === "dodge" || active === "tetris" || active === "flappy")) overlay("Press Start"); }
+    function draw() { games[active].draw(game); scoreEl.textContent = Math.floor(game.score); if (game.over) overlay("YOU WON OR LOST IDK, YOU DID SOMETHING"); else if (!game.running && (active === "dodge" || active === "tetris" || active === "flappy")) overlay("Press Start"); }
     function overlay(text) { ctx.fillStyle = "rgba(16,18,36,.62)"; ctx.fillRect(0,0,760,570); ctx.fillStyle = "white"; ctx.font = "800 46px system-ui"; ctx.textAlign = "center"; ctx.fillText(text, 380, 280); ctx.font = "600 18px system-ui"; ctx.fillText("Restart keeps the page alive", 380, 316); }
     function sky() { const g = ctx.createLinearGradient(0,0,0,570); g.addColorStop(0,"#70e1ff"); g.addColorStop(1,"#ffe770"); ctx.fillStyle = g; ctx.fillRect(0,0,760,570); }
     function space() { ctx.fillStyle = "#111326"; ctx.fillRect(0,0,760,570); for (let i=0;i<34;i++){ ctx.fillStyle = colors[i%colors.length]+"55"; ctx.fillRect((i*83)%760,(i*47)%570,4,4); } }
